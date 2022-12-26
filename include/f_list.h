@@ -46,6 +46,7 @@ public:
         {
             return *this;
         }
+        clear_all();
         First = new list_node();
         First->data = other.First->data;
         list_node* uk1 = other.First;
@@ -144,17 +145,19 @@ public:
     {
         list_node* to_del = NULL;
         list_node* pre = First;
-        for (list_node* it = First; it;)
+        for (list_node* it = First->next; it;)
         {
             if (it -> data == a) to_del = pre;
             pre = it;
             it = it -> next;
         }
-        
-        if (to_del!=NULL)
+        if (to_del==NULL)
         {
-            if (to_del == First) pop_front();
-            else erase_after(to_del);
+            if (First->data==a) pop_front();
+                
+        }else
+        {
+            erase_after(to_del);
         }
     }
     list_node* begin()
